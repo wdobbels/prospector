@@ -226,8 +226,11 @@ def read_hdf5(filename, **extras):
             if group not in hf:
                 continue
             # read the arrays in that group into the dictionary for that group
-            for k, v in hf[group].items():
-                d[k] = np.array(v)
+            try:
+                for k, v in hf[group].items():
+                    d[k] = np.array(v)
+            except AttributeError:  # If only a single element (e.g. emcee demo)
+                d[group] = np.array(hf[group])
             # unserialize the attributes and put them in the dictionary
             for k, v in hf[group].attrs.items():
                 try:
