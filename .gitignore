@@ -19,3 +19,5 @@ demo/output/
 demo/results/
 demo/test/
 misc/
+*.egg-info/
+prospect/_version.py
